@@ -101,7 +101,20 @@ def run_ai():
 
     data = ref.get()
 
-    values = list(data.values())
+    values = []
+
+    for item in data.values():
+
+        try:
+            datetime.strptime(
+                item['time'],
+                "%Y-%m-%d %H:%M:%S"
+            )
+            values.append(item)
+
+        except:
+            continue
+
     values.sort(
         key=lambda x:
         datetime.strptime(
